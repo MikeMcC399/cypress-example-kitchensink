@@ -3,8 +3,8 @@ name: Chrome
 on: push
 
 jobs:
-  chrome:
-    runs-on: ubuntu-22.04
+  yarn-modern-pnp:
+    runs-on: macos-12
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -12,6 +12,18 @@ jobs:
         uses: cypress-io/github-action@v5
         timeout-minutes: 10
         with:
-          build: npm run build
-          start: npm start
-          browser: chrome
+          install-command: yarn install
+          start: yarn run start
+          command: yarn run --binaries-only cypress run
+
+  yarn-modern-pnp-no-server:
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Chrome
+        uses: cypress-io/github-action@v5
+        timeout-minutes: 10
+        with:
+          install-command: yarn install
+          command: yarn run --binaries-only cypress run
