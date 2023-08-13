@@ -10,6 +10,8 @@
   "scripts": {
     "build": "npm run lint",
     "start": "node ./scripts/start.js",
+    "yarn:start": "yarn node ./scripts/start.js",
+
     "dev": "npm start",
     "test": "npm start & cypress run",
     "pretest": "npm run lint",
