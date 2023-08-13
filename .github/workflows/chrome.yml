@@ -3,7 +3,7 @@ name: Chrome
 on: push
 
 jobs:
-  yarn-modern-pnp:
+  yarn-modern-pnp-macos-12:
     runs-on: macos-12
     steps:
       - name: Checkout
@@ -16,8 +16,8 @@ jobs:
           start: yarn run start
           command: yarn run --binaries-only cypress run
 
-  yarn-modern-pnp-no-server:
-    runs-on: macos-12
+  yarn-modern-pnp-macos-13:
+    runs-on: macos-13
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,4 +26,17 @@ jobs:
         timeout-minutes: 10
         with:
           install-command: yarn install
+          start: yarn run start
           command: yarn run --binaries-only cypress run
+
+  # yarn-modern-pnp-no-server:
+  #   runs-on: macos-12
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #     - name: Chrome
+  #       uses: cypress-io/github-action@v5
+  #       timeout-minutes: 10
+  #       with:
+  #         install-command: yarn install
+  #         command: yarn run --binaries-only cypress run
