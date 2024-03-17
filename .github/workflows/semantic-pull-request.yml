@@ -14,15 +14,9 @@ jobs:
     steps:
       # use a fork of the GitHub action - we cannot pull in untrusted third party actions
       # see https://github.com/cypress-io/cypress/pull/20091#discussion_r801799647
-      - name: Print CI env variables
-        run: |
-          npm i -g @bahmutov/print-env@2
-          print-env GITHUB BUILD ACTIONS || true
-      - run: echo $GITHUB_REF_PROTECTED
-      - name: conditional for protected
-        if: github.ref_protected == true
-        run: echo This is a protect branch
-      - uses: cypress-io/action-semantic-pull-request@v4
+      - name: Check semantics for PR
+        if: github.ref_protected == true # only for protected branches
+        uses: cypress-io/action-semantic-pull-request@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
