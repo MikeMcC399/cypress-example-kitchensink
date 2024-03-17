@@ -1,11 +1,14 @@
 name: "Semantic Pull Request"
-
+# comment
 on:
   pull_request_target:
     types:
       - opened
       - edited
       - synchronize
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
 
 jobs:
   main:
