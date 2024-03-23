@@ -29,3 +29,32 @@ jobs:
           start: npm start
           browser: firefox
           headed: true
+
+  firefox-headed-v5:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Firefox
+        uses: cypress-io/github-action@v5
+        timeout-minutes: 10
+        with:
+          build: npm run build
+          start: npm start
+          browser: firefox
+          headed: true
+
+  firefox-headed-v5-video:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Firefox
+        uses: cypress-io/github-action@v5
+        timeout-minutes: 10
+        with:
+          build: npm run build
+          start: npm start
+          browser: firefox
+          headed: true
+          config: video=true
