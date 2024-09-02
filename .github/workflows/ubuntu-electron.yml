@@ -1,0 +1,24 @@
+name: Ubuntu
+
+on: workflow_dispatch
+
+jobs:
+  ubuntu:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Cypress test
+        uses: cypress-io/github-action@v6
+        timeout-minutes: 10
+        with:
+          build: npm run build  # runs linting
+          start: npm start      # starts server
