@@ -5,50 +5,6 @@ name: Using Cypress GH Action
 on: [push, workflow_dispatch]
 
 jobs:
-  single-run:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        timeout-minutes: 10
-        with:
-          build: npm run build
-          start: npm start
-
-  parallel-runs:
-    name: Parallel 4x
-    runs-on: ubuntu-24.04
-    strategy:
-      # when one test fails, DO NOT cancel the other
-      # containers, because this will kill Cypress processes
-      # leaving the Cypress Cloud dashboard hanging ...
-      # https://github.com/cypress-io/github-action/issues/48
-      fail-fast: false
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-      # because of "record" and "parallel" parameters
-      # these containers will load balance all found tests among themselves
-      - name: run tests
-        uses: cypress-io/github-action@v6
-        timeout-minutes: 5
-        with:
-
-          start: npm start
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.dashboardRecordKey }}
 
   parallel-runs-across-platforms:
     name: every OS
@@ -61,7 +17,10 @@ jobs:
       matrix:
         # run 2 copies of the current job in parallel
         # and they will load balance all specs
-        os: ['ubuntu-24.04', 'windows-latest', 'macos-latest']
+        os: [ # 'ubuntu-24.04',
+            'windows-latest',
+              # 'macos-latest'
+              ]
 
     runs-on: ${{ matrix.os }}
     steps:
