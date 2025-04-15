@@ -1,0 +1,33 @@
+diff --git a/node_modules/cypress/lib/tasks/download.js b/node_modules/cypress/lib/tasks/download.js
+index ca4e557..07e9c3e 100644
+--- a/node_modules/cypress/lib/tasks/download.js
++++ b/node_modules/cypress/lib/tasks/download.js
+@@ -52,6 +52,11 @@ const getCA = () => {
+ const prepend = (arch, urlPath, version) => {
+   const endpoint = url.resolve(getBaseUrl(), urlPath);
+   const platform = os.platform();
++  if ((platform === 'win32') && (arch === 'arm64')) {
++    debug(`detected unsupported platform ${platform} architecture ${arch} combination`);
++    arch = 'x64';
++    debug(`overriding to download ${platform}-${arch} instead`)
++    };
+   const pathTemplate = util.getEnv('CYPRESS_DOWNLOAD_PATH_TEMPLATE', true);
+   return pathTemplate ? pathTemplate.replace(/\\?\$\{endpoint\}/g, endpoint).replace(/\\?\$\{platform\}/g, platform).replace(/\\?\$\{arch\}/g, arch).replace(/\\?\$\{version\}/g, version) : `${endpoint}?platform=${platform}&arch=${arch}`;
+ };
+diff --git a/node_modules/cypress/lib/tasks/install.js b/node_modules/cypress/lib/tasks/install.js
+index 9e15a2c..2fa4e84 100644
+--- a/node_modules/cypress/lib/tasks/install.js
++++ b/node_modules/cypress/lib/tasks/install.js
+@@ -134,10 +134,11 @@ const downloadAndUnzip = ({
+ };
+ const validateOS = () => {
+   return util.getPlatformInfo().then(platformInfo => {
+-    return platformInfo.match(/(win32-x64|linux-x64|linux-arm64|darwin-x64|darwin-arm64)/);
++    return platformInfo.match(/(win32-x64|win32-arm64|linux-x64|linux-arm64|darwin-x64|darwin-arm64)/);
+   });
+ };
+ 
++
+ /**
+  * Returns the version to install - either a string like `1.2.3` to be fetched
+  * from the download server or a file path or HTTP URL.
