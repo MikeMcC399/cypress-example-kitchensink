@@ -2,9 +2,13 @@ name: Chrome
 
 on: [push, workflow_dispatch]
 
+env:
+  CYPRESS_CACHE_FOLDER: $HOME/.cache/Cypress
+  DEBUG: 'cypress:cli*'
+
 jobs:
   chrome:
-    runs-on: ubuntu-24.04
+    runs-on: windows-11-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -12,10 +16,25 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Chrome
+      - name: Install dependencies and patch
+        run: npm ci
+        env:
+          CYPRESS_INSTALL_BINARY: 0 # do not install Cypress binary
+      - name: Install Cypress binary
+        run: npx cypress install
+      - name: List Cypress cache folder
+        run: npx cypress cache list
+      - name: Verify Cypress install
+        run: npx cypress verify
+      - name: Show Cypress version
+        run: npx cypress version
+      - name: Show installed browsers
+        run: npx cypress info
+      - name: Cypress test with Chrome
         uses: cypress-io/github-action@v6
         timeout-minutes: 10
         with:
           build: npm run build
           start: npm start
           browser: chrome
+          install: false
