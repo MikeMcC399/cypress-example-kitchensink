@@ -16,6 +16,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
+      - name: Show runner infos
+        run: |
+          node -p 'os.platform()'
+          node -p 'os.arch()'
+          node -p 'os.machine()'
+          node -p 'os.cpus()'
+          node -p 'os.type()'
+          node -p 'os.version()'
+          node -p 'os.release()'
       - name: Install dependencies and patch
         run: npm ci
         env:
