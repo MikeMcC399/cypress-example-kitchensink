@@ -1,0 +1,19 @@
+diff --git a/node_modules/cypress/lib/tasks/install.js b/node_modules/cypress/lib/tasks/install.js
+index 4011fff..1f24227 100644
+--- a/node_modules/cypress/lib/tasks/install.js
++++ b/node_modules/cypress/lib/tasks/install.js
+@@ -32,7 +32,13 @@ function _getBinaryUrlFromBuildInfo(arch, {
+   commitSha,
+   commitBranch
+ }) {
+-  return `https://cdn.cypress.io/beta/binary/${version}/${os.platform()}-${arch}/${commitBranch}-${commitSha}/cypress.zip`;
++  const platform = os.platform()
++  if ((platform === 'win32') && (arch === 'arm64')) {
++    debug(`detected platform ${platform} architecture ${arch} combination`)
++    arch = 'x64'
++    debug(`overriding to download ${platform}-${arch} pre-release binary instead`)
++  }
++  return `https://cdn.cypress.io/beta/binary/${version}/${platform}-${arch}/${commitBranch}-${commitSha}/cypress.zip`;
+ }
+ const alreadyInstalledMsg = () => {
+   if (!util.isPostInstall()) {
