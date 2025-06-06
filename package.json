@@ -67,7 +67,7 @@
   "devDependencies": {
     "@bahmutov/print-env": "1.3.0",
     "@stylistic/eslint-plugin": "4.4.0",
-    "cypress": "https://cdn.cypress.io/beta/npm/14.5.0/win32-x64/develop-76eb0833273871b0f13853e1a23ab5fa838ef0c5/cypress.tgz",
+    "cypress": "https://cdn.cypress.io/beta/npm/14.5.0/win32-x64/develop-5204589e34433fd2f7d0c631a15c4e0ec118a569/cypress.tgz",
     "eslint": "9.27.0",
     "eslint-plugin-cypress": "5.0.0",
     "eslint-plugin-jsonc": "2.20.1",
