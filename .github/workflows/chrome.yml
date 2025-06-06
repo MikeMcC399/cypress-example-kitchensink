@@ -18,13 +18,14 @@ jobs:
           node-version-file: .node-version
       - name: Show runner infos
         run: |
-          node -p 'os.platform()'
-          node -p 'os.arch()'
-          node -p 'os.machine()'
-          node -p 'os.cpus()'
-          node -p 'os.type()'
-          node -p 'os.version()'
-          node -p 'os.release()'
+          node -p "'OS type:     ' + os.type()"
+          node -p "'OS version:  ' + os.version()"
+          node -p "'OS release:  ' + os.release()"
+          node -p "'OS platform: ' + os.platform()"
+          node -p "'OS arch:     ' + os.arch()"
+          node -p "'OS machine:  ' + os.machine()"
+          echo "OS cpus:"
+          node -p "os.cpus()"
       - name: Install dependencies and patch
         run: npm ci
         env:
