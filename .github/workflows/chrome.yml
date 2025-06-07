@@ -21,8 +21,9 @@ jobs:
       # fails: Error: Unsupported platform "windows" "arm64"
       - name: Edge install
         uses: browser-actions/setup-edge@v1
-      - name: Firefox install
-        uses: browser-actions/setup-firefox@v1
+      # - name: Firefox install
+      #   uses: browser-actions/setup-firefox@v1
+      # fails: Error: Unsupported platform windows arm64 for version latest
       - name: Show runner infos
         run: |
           node -p "'OS type:     ' + os.type()"
