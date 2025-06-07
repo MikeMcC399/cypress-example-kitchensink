@@ -16,8 +16,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
-      - name: Chrome install
-        uses: browser-actions/setup-chrome@v1
+      # - name: Chrome install
+      #   uses: browser-actions/setup-chrome@v1
+      # fails: Error: Unsupported platform "windows" "arm64"
       - name: Edge install
         uses: browser-actions/setup-edge@v1
       - name: Firefox install
