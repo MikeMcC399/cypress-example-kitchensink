@@ -16,6 +16,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
+      - name: Chrome install
+        uses: browser-actions/setup-chrome@v1
+      - name: Edge install
+        uses: browser-actions/setup-edge@v1
+      - name: Firefox install
+        uses: browser-actions/setup-firefox@v1
       - name: Show runner infos
         run: |
           node -p "'OS type:     ' + os.type()"
