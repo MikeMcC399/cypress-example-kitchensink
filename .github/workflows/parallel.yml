@@ -111,11 +111,14 @@ jobs:
           npx cypress cache path
           npx cypress cache list
 
+      - name: Check versions
+        run: npx cypress info
+
       # Starts local server, then runs Cypress tests and records results on Cypress Cloud
       - name: Cypress tests
         run: |
           npm start &
-          npx cypress run --record --parallel --group "Parallel 2x"
+          npx cypress run --record --parallel --group "Parallel 2x" --browser chrome
         env:
           # place your secret record key at
           # https://github.com/cypress-io/cypress-example-kitchensink/settings/secrets
@@ -170,11 +173,14 @@ jobs:
           npx cypress cache path
           npx cypress cache list
 
+      - name: Check versions
+        run: npx cypress info
+
       # Starts local server, then runs Cypress tests and records results on Cypress Cloud
       - name: Cypress tests
         run: |
           npm start &
-          npx cypress run --record --parallel --group "Parallel 2x"
+          npx cypress run --record --parallel --group "Parallel 2x" --browser chrome
         env:
           # place your secret record key at
           # https://github.com/cypress-io/cypress-example-kitchensink/settings/secrets
