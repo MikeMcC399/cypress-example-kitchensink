@@ -28,7 +28,7 @@ jobs:
     name: Parallel 4x
     # Only run this job in the parent repository, not in any fork.
     # To use the example in a fork, a different projectId and Record Key are required.
-    if: github.repository_owner == 'cypress-io'
+    # if: github.repository_owner == 'cypress-io'
     runs-on: ubuntu-24.04
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -70,7 +70,7 @@ jobs:
     name: Every OS
     # Only run this job in the parent repository, not in any fork.
     # To use the example in a fork, a different projectId and Record Key are required.
-    if: github.repository_owner == 'cypress-io'
+    # if: github.repository_owner == 'cypress-io'
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
